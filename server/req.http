@@ -1,0 +1,138 @@
+### Register a test user
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "testpass123",
+    "role": "user"
+}
+
+### Login to get the token
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "testpass123"
+}
+
+### Test wearable predict endpoint
+POST http://localhost:8080/api/wearable/predict
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDY4ZDZjZDY0NWY3OTlmYjE4ZGE3ZiIsInJvbGVzIjpbInVzZXIiXSwiaWF0IjoxNzYyMDQxNDMzLCJleHAiOjE3NjI0NzM0MzN9.Rs4VUVWiRFcELY4TTiLm7sAwPVdb2s-MdyejElaxBNY
+
+{
+  "wearableData": {
+    "bpm": 85,
+    "sleep_duration": 2,
+    "blood_oxygen_spo2": 98,
+    "step_count": 6200
+  },
+  "userInputs": {
+    "anxiety_level": 19,
+    "mental_health_history": 0,
+    "headache": 3,
+    "academic_performance": 2.2,
+    "financial_condition": "no",
+    "safety": 1,
+    "screen_time": 6,
+    "extracurricular_activities": 2,
+    "gender": 1,
+    "bmi": 22.5
+  },
+  "periodData": {
+    "period_flow": 1,
+    "expected_vs_actual_date_difference": 2
+  }
+}
+
+### Classifier Prediction
+POST http://127.0.0.1:5000/predict/classifier
+Content-Type: application/json
+
+{
+  "features": [
+    19, 1, 3, 87, 4, 2, 2, 7, 0, 97, 1000, 5, 8000, 22
+  ]
+}
+
+### Regressor Prediction
+POST http://127.0.0.1:5000/predict/regressor
+Content-Type: application/json
+
+{
+  "features": [2, 1]
+}
+
+### Save Mental Health Profile (Survey) - Replace TOKEN with token from login response
+POST http://localhost:8080/api/users/survey
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDVmY2RiMmM5YWFlNmFkYjJkN2I3MCIsInJvbGVzIjpbInVzZXIiXSwiaWF0IjoxNzYyMDAwMDk2LCJleHAiOjE3NjI0MzIwOTZ9.BcRELmjJkGSOQnTYnJKhDWO7dAdMMqEmARYr1I1_SDw
+
+{
+  "anxiety_level": 15,
+  "mental_health_history": 1,
+  "headache": 3,
+  "financial_condition": "yes",
+  "safety": 4
+}
+
+### Save Mental Health Profile (Survey) - Complete Example
+### Step 1: Login first to get a fresh token
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "testpass123"
+}
+
+### Step 2: Copy the token from login response above, then use it here
+POST http://localhost:8080/api/users/survey
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MDY2NzExZWM2NjJmZjFiYmQzNzQyNiIsInJvbGVzIjpbInVzZXIiXSwiaWF0IjoxNzYyMDM2NDgwLCJleHAiOjE3NjI0Njg0ODB9.QsYC3XQz-JJqQjxL_1-p0eWWVG11wPUu8AfXOj6TJ2I
+
+{
+  "anxiety_level": 12,
+  "mental_health_history": 0,
+  "headache": 2,
+  "financial_condition": "no",
+  "safety": 3
+}
+
+### Note: The saveSurvey endpoint returns the saved survey data in the response
+### You can verify by checking the response body which includes the "survey" object with all fields including "safety"
+
+### Test Mental Health Profile Save - Complete with all fields
+### Make sure to update the token from login response first!
+POST http://localhost:8080/api/users/survey
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "anxiety_level": 15,
+  "mental_health_history": 1,
+  "headache": 4,
+  "academic_performance": 4,
+  "financial_condition": "no",
+  "safety": 2,
+  "extracurricular_activities": 2,
+  "gender": 0
+}
+
+### Expected Response:
+### {
+###   "message": "Survey saved",
+###   "survey": {
+###     "anxiety_level": 15,
+###     "mental_health_history": 1,
+###     "headache": 4,
+###     "academic_performance": 4,
+###     "financial_condition": "no",
+###     "safety": 2,
+###     "extracurricular_activities": 2,
+###     "gender": 0
+###   }
+### }
+

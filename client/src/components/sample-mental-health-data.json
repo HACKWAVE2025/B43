@@ -1,0 +1,81 @@
+{
+  "sampleData": [
+    {
+      "anxietyLevel": 8,
+      "mentalHealthHistory": "No",
+      "headache": 2,
+      "financialCondition": "Yes",
+      "safety": 4,
+      "notes": "Feeling good overall, minor stress from exams"
+    },
+    {
+      "anxietyLevel": 15,
+      "mentalHealthHistory": "Yes",
+      "headache": 4,
+      "financialCondition": "No",
+      "safety": 2,
+      "notes": "High anxiety period, seeking support"
+    },
+    {
+      "anxietyLevel": 5,
+      "mentalHealthHistory": "No",
+      "headache": 1,
+      "financialCondition": "Yes",
+      "safety": 5,
+      "notes": "Stable and managing well"
+    }
+  ],
+  "columnDefinitions": {
+    "anxietyLevel": {
+      "type": "number",
+      "range": "1-20",
+      "description": "Self-reported anxiety level where 1 is minimal and 20 is severe",
+      "required": true
+    },
+    "mentalHealthHistory": {
+      "type": "string or boolean",
+      "options": ["Yes", "No", true, false],
+      "description": "Whether the student has a documented mental health history",
+      "required": true
+    },
+    "headache": {
+      "type": "number",
+      "range": "1-5",
+      "description": "Headache severity level (1=None, 2=Mild, 3=Moderate, 4=Strong, 5=Severe)",
+      "required": true
+    },
+    "financialCondition": {
+      "type": "string or boolean",
+      "options": ["Yes", "No", true, false],
+      "description": "Whether the student has stable financial conditions",
+      "required": true
+    },
+    "safety": {
+      "type": "number",
+      "range": "1-5",
+      "description": "Perceived safety level (1=Very Low, 2=Low, 3=Moderate, 4=High, 5=Very High)",
+      "required": true
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional additional notes (not imported by the system)",
+      "required": false
+    }
+  },
+  "importInstructions": {
+    "step1": "Prepare your Excel file with the required column headers",
+    "step2": "Ensure data is in the first row after headers",
+    "step3": "Save as .xlsx or .csv format",
+    "step4": "Click 'Import from Excel' button in the interface",
+    "step5": "Select your file",
+    "step6": "System will auto-populate all fields",
+    "step7": "Click 'Save / Update Profile' to persist changes"
+  },
+  "validationRules": {
+    "anxietyLevel": "Auto-clamped to 1-20 range if outside bounds",
+    "mentalHealthHistory": "Converts 'Yes'/true to true, anything else to false",
+    "headache": "Auto-clamped to 1-5 range if outside bounds",
+    "financialCondition": "Converts 'Yes'/true to true, anything else to false",
+    "safety": "Auto-clamped to 1-5 range if outside bounds"
+  }
+}
