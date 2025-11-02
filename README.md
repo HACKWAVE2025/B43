@@ -43,10 +43,6 @@ This web-based platform provides *real-time stress prediction* and *personalized
 | *Visualization* | D3.js | Displays trends, feature impacts, and progress metrics |
 
 ---
-
-## 🧭 System Flow  
-
-```mermaid
 flowchart TD
     A[User Authentication via Firebase] --> B[Data Collection]
     B --> C[Wearable Data + Survey Inputs]
