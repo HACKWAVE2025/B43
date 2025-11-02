@@ -35,10 +35,10 @@ This web-based platform provides *real-time stress prediction* and *personalized
 |-------|-----------------|--------------|
 | *Frontend* | React.js, Tailwind CSS, D3.js | Interactive dashboard, responsive design, data visualization |
 | *Backend* | Node.js (Express) | API server handling data aggregation and ML predictions |
-| *Database* | MongoDB, Firebase Firestore | Stores user data, predictions, and journaling inputs |
-| *Authentication* | Firebase OAuth | Secure login and session management |
+| *Database* | MongoDB | Stores user data, predictions, and journaling inputs |
+| *Authentication* | Secure login and session management with JWT |
 | *Machine Learning* | TensorFlow, Random Forest Classifier & Regressor | Predicts stress levels and menstrual stress impacts |
-| *AI Integration* | Gemini API, Hugging Face | Recommendation generation and suicidality detection |
+| *AI Integration* | Gemini API | Recommendation generation and suicidality detection |
 | *Data Input* | Wearables + Excel Upload | Collects BPM, sleep duration, steps, SpO₂, etc. |
 | *Visualization* | D3.js | Displays trends, feature impacts, and progress metrics |
 
